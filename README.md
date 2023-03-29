@@ -1,1 +1,1 @@
-# plg_systrio_dolibarr
+# plg_hikabarr
