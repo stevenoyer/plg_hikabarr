@@ -1,0 +1,10 @@
+/*
+!/.gitignore
+!/README.md
+.DS_Store
+
+!plugins
+plugins/*
+!plugins/hikashop
+plugins/hikashop/*
+!plugins/hikashop/hikabarr
