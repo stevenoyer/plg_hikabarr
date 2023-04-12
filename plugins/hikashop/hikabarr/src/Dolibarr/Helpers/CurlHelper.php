@@ -8,7 +8,7 @@ class CurlHelper
     /**
      * @link doc => https://www.php.net/manual/fr/ref.curl.php
      */
-    public function curl(string $url, string $method, array $headers = [], array $data = []): string|bool
+    public function curl(string $url, string $method, array $headers = [], array|string $data = []): string|bool
     {
         $curl = curl_init();
 
