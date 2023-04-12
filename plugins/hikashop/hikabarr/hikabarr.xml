@@ -13,8 +13,11 @@
 	<files>
 		<folder>src</folder>
 		<folder>language</folder>
+		<folder>vendor</folder>
 		<filename plugin="hikabarr">hikabarr.php</filename>
 		<filename>hikabarr.xml</filename>
+		<filename>composer.json</filename>
+		<filename>composer.lock</filename>
 	</files>
 	<languages>
 		<language tag="fr-FR">language/fr-FR/plg_hikashop_hikabarr.ini</language>
