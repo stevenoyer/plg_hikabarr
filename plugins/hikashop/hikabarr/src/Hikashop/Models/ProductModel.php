@@ -6,6 +6,7 @@ class ProductModel
 {
     
     public int|null $product_id = null;
+    public string $product_code;
     public string $product_name;
     public string $product_description;
     public int $product_quantity; // Default "-1"
@@ -23,6 +24,7 @@ class ProductModel
     
     public array $prices;
     public array $categories;
+    public array $images;
 
     public function __construct()
     {
