@@ -246,27 +246,7 @@ class PlgHikashopHikabarr extends CMSPlugin
 	 */
 	public function onBeforeOrderCreate(&$order, &$do)
 	{
-		// Mise en variable de l'objet UserModel d'Hikashop
-		$userData = new UserModel;
-		$userData->id = $order->order_user_id;
-
-		// Récupération de l'utilisateur Hikashop
-		$user = new User($userData);
-		$user_hika = $user->get();
-
-		// Mise à jour de l'utilisateur "tiers" dans Dolibarr
-		$userDolibarr = new ThirdpartyModel;
-		$userDolibarr->name = $user_hika->name;
-		$userDolibarr->email = $user_hika->email;
-		$userDolibarr->ref_ext = $user_hika->user_id;
-		$userDolibarr->address = $order->cart->shipping_address->address_street;
-		$userDolibarr->zip = $order->cart->shipping_address->address_post_code;
-		$userDolibarr->town = $order->cart->shipping_address->address_city;
-		$userDolibarr->phone = $order->cart->shipping_address->address_telephone;
-
-		// Appelle du service et sauvegarde du "tiers" sur Dolibarr
-		$thidPartyClass = new ThirdpartyService($this->client, $userDolibarr);
-		$thidPartyClass->save();
+		$this->updateUserOrder($order);
 	}
 
 	/**
@@ -307,14 +287,32 @@ class PlgHikashopHikabarr extends CMSPlugin
 
 	public function onBeforeOrderUpdate(&$order, &$do)
 	{
+		$this->updateUserOrder($order);
+	}
+
+	public function updateUserOrder(object $order)
+	{
+		// Mise en variable de l'objet UserModel d'Hikashop
 		$userData = new UserModel;
 		$userData->id = $order->order_user_id;
 
+		// Récupération de l'utilisateur Hikashop
 		$user = new User($userData);
+		$user_hika = $user->get();
 
-		var_dump($order->cart, $user);
-		die;
-		$do = false;
+		// Mise à jour de l'utilisateur "tiers" dans Dolibarr
+		$userDolibarr = new ThirdpartyModel;
+		$userDolibarr->name = $user_hika->name;
+		$userDolibarr->email = $user_hika->email;
+		$userDolibarr->ref_ext = $user_hika->user_id;
+		$userDolibarr->address = $order->cart->shipping_address->address_street;
+		$userDolibarr->zip = $order->cart->shipping_address->address_post_code;
+		$userDolibarr->town = $order->cart->shipping_address->address_city;
+		$userDolibarr->phone = $order->cart->shipping_address->address_telephone;
+
+		// Appelle du service et sauvegarde du "tiers" sur Dolibarr
+		$thidPartyClass = new ThirdpartyService($this->client, $userDolibarr);
+		$thidPartyClass->save();
 	}
 
 }
