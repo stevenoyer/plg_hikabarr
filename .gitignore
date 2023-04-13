@@ -8,4 +8,3 @@ plugins/*
 !plugins/hikashop
 plugins/hikashop/*
 !plugins/hikashop/hikabarr
-plugins/hikashop/hikabarr/vendor
