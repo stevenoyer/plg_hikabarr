@@ -1,14 +1,14 @@
 # 🔌 Plugin Hikabarr
-Hikabarr est un plugin de type Hikashop qui permet de créer une passerelle entre Dolibarr et le composant Hikashop.
+Hikabarr est un plugin de type Hikashop qui permet de créer une passerelle entre Dolibarr et le composant Hikashop. Le but étant de gérer votre boutique Hikashop avec Dolibarr.
 Vous pourrez gérer depuis Dolibarr :
 - vos produits
 - vos catégories
 - vos expéditions
 
-⚠️ Toutes les données provenant de Hikashop ne seront pas modifier sur Dolibarr excepté :
-- Commandes clients
-- Données utilisateurs
-- Mise à jour des stocks
+⚠️ Toutes les données provenant de Hikashop ne seront pas modifiées sur Dolibarr sauf :
+- commandes clients
+- données utilisateurs
+- mise à jour des stocks
 
 ## ⚙️ Installation
 Pour installer le plugin veuillez suivre les étapes suivantes :
