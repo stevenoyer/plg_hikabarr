@@ -2,7 +2,7 @@
 <extension type="plugin" version="4.0" method="upgrade" group="hikashop">
 	<name>plg_hikashop_hikabarr</name>
 	<creationDate>28 mars 2023</creationDate>
-	<version>0.1</version>
+	<version>1.0</version>
 	<author>Steven Oyer (systrio)</author>
 	<authorEmail>steven@systrio.fr</authorEmail>
 	<authorUrl>http://www.systrio.fr</authorUrl>
