@@ -4,6 +4,7 @@ namespace Systrio\Plugins\Hikabarr\Hikashop\Class;
 
 use hikashopProductClass;
 use Joomla\CMS\Factory;
+use Joomla\Database\DatabaseDriver;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\PriceModel;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\ProductModel;
 
@@ -12,6 +13,7 @@ class Product
 
     private ProductModel $product;
     private PriceModel $price;
+    private DatabaseDriver $db;
 
     public function __construct(ProductModel $product, PriceModel $price)
     {
@@ -19,6 +21,7 @@ class Product
         $this->price = $price;
 
         $this->product->prices = [$this->price];
+        $this->db = Factory::getContainer()->get('DatabaseDriver');
     }
 
     public function save(): mixed
@@ -83,17 +86,15 @@ class Product
 
     public function getByName(): mixed
     {
-        $db = Factory::getContainer()->get('DatabaseDriver');
-
-        $query = $db
+        $query = $this->db
             ->getQuery(true)
             ->select('product_id')
             ->from('#__hikashop_product')
-            ->where($db->qn('product_name') . ' = ' . $db->q($this->product->product_name));
+            ->where($this->db->qn('product_name') . ' = ' . $this->db->q($this->product->product_name));
 
-        if (!empty($db->setQuery($query)->loadObject()->product_id))
+        if (!empty($this->db->setQuery($query)->loadObject()->product_id))
         {
-            $this->product->product_id = $db->setQuery($query)->loadObject()->product_id;
+            $this->product->product_id = $this->db->setQuery($query)->loadObject()->product_id;
             return $this->getById();
         }
 
@@ -102,17 +103,15 @@ class Product
 
     public function getByRef(): mixed
     {
-        $db = Factory::getContainer()->get('DatabaseDriver');
-
-        $query = $db
+        $query = $this->db
             ->getQuery(true)
             ->select('product_id')
             ->from('#__hikashop_product')
-            ->where($db->qn('product_code') . ' = ' . $db->q($this->product->product_code));
+            ->where($this->db->qn('product_code') . ' = ' . $this->db->q($this->product->product_code));
 
-        if (!empty($db->setQuery($query)->loadObject()->product_id))
+        if (!empty($this->db->setQuery($query)->loadObject()->product_id))
         {
-            $this->product->product_id = $db->setQuery($query)->loadObject()->product_id;
+            $this->product->product_id = $this->db->setQuery($query)->loadObject()->product_id;
             return $this->getById();
         }
 
@@ -121,15 +120,13 @@ class Product
 
     public function getPrices(): array|bool
     {
-        $db = Factory::getContainer()->get('DatabaseDriver');
-
-        $query = $db
+        $query = $this->db
             ->getQuery(true)
             ->select('price_id, price_product_id, price_value, price_currency_id')
             ->from('#__hikashop_price')
-            ->where($db->qn('price_product_id') . ' = ' . $db->q($this->product->product_id));
+            ->where($this->db->qn('price_product_id') . ' = ' . $this->db->q($this->product->product_id));
 
-        return $db->setQuery($query)->loadObjectList();
+        return $this->db->setQuery($query)->loadObjectList();
     }
     
 }
