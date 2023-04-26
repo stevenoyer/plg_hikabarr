@@ -24,8 +24,11 @@ class ThirdpartyService
 
         if (!empty($user->error) && ($user->error->code == 404 || $user->error->code == 400))
         {
-            $user = $this->client->requestApi->get('thirdparties', ['sqlfilters' => '(t.ref_ext:=:' . $this->user->ref_ext . ')']);
-            $user = json_decode($user);
+            if (!empty($this->user->ref_ext) && !is_null($this->user->ref_ext))
+            {
+                $user = $this->client->requestApi->get('thirdparties', ['sqlfilters' => '(t.ref_ext:=:' . $this->user->ref_ext . ')']);
+                $user = json_decode($user);
+            }
         }
 
         return $user;
