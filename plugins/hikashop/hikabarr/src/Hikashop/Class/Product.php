@@ -8,6 +8,8 @@ use Joomla\Database\DatabaseDriver;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\PriceModel;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\ProductModel;
 
+require_once JPATH_ROOT . '/administrator/components/com_hikashop/classes/product.php';
+
 class Product
 {
 
@@ -29,11 +31,6 @@ class Product
         if (!empty($this->get()))
         {
             $this->product->product_id = $this->get()->product_id;
-        }
-
-        if (!empty($this->getPrices()))
-        {
-            $this->product->prices = $this->getPrices();
         }
 
         $hikashopProduct = new hikashopProductClass();
@@ -116,17 +113,6 @@ class Product
         }
 
         return false;
-    }
-
-    public function getPrices(): array|bool
-    {
-        $query = $this->db
-            ->getQuery(true)
-            ->select('price_id, price_product_id, price_value, price_currency_id')
-            ->from('#__hikashop_price')
-            ->where($this->db->qn('price_product_id') . ' = ' . $this->db->q($this->product->product_id));
-
-        return $this->db->setQuery($query)->loadObjectList();
     }
     
 }
