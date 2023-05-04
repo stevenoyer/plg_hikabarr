@@ -1,19 +1,16 @@
 <?php
 
-use Joomla\CMS\Factory;
-use React\Async;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
-use React\EventLoop\Loop;
+use Joomla\Event\DispatcherInterface;
+use Joomla\Event\Event;
+use Joomla\Event\SubscriberInterface;
+use Systrio\Plugins\Hikabarr\Events\UserEvent;
 use Systrio\Plugins\Hikabarr\Dolibarr\Dolibarr;
 use Systrio\Plugins\Hikabarr\Events\OrderEvent;
+use Systrio\Plugins\Hikabarr\Helpers\DataHelper;
 use Systrio\Plugins\Hikabarr\Events\ProductEvent;
-use Systrio\Plugins\Hikabarr\Events\UserEvent;
-use Systrio\Plugins\Hikabarr\Helpers\CategoryHelper;
-use Systrio\Plugins\Hikabarr\Helpers\DebugHelper;
-use Systrio\Plugins\Hikabarr\Helpers\ProductHelper;
-
-use function React\Async\async;
+use Systrio\Plugins\Hikabarr\Service\HikabarrServiceInterface;
 
 require_once JPATH_PLUGINS . '/hikashop/hikabarr/vendor/autoload.php';
 
@@ -26,14 +23,14 @@ class PlgHikashopHikabarr extends CMSPlugin
 	 * @since  3.1
 	 */
 	protected $autoloadLanguage = true;
-	private DebugHelper $debugHelper;
-	private Dolibarr $client;
+	private DataHelper $dataHelper;
+	protected Dolibarr $client;
 	private UserEvent $userEvent;
 	private OrderEvent $orderEvent;
-	private ProductEvent $productEvent;
+	protected ProductEvent $productEvent;
 	public $params;
-	private string $api_key;
-	private string $api_url;
+	protected string $api_key;
+	protected string $api_url;
 
 	public function __construct(&$subject, $config = [])
 	{
@@ -55,18 +52,20 @@ class PlgHikashopHikabarr extends CMSPlugin
 		}
 
 		// Instance des classes
-		$this->debugHelper = new DebugHelper;
 		$this->client = new Dolibarr($this->api_url, $this->api_key);
 
 		// Events
 		$this->userEvent = new UserEvent($this->client);
 		$this->orderEvent = new OrderEvent($this->client);
 		$this->productEvent = new ProductEvent($this->client);
+
+		// Helpers
+		$this->dataHelper = new DataHelper($this->client);
 	}
 	
 	public function onBeforeProductListingLoad(&$filters, &$order, &$parent, &$select, &$select2, &$a, &$b, &$on)
 	{
-		$this->productEvent->onBeforeProductListingLoad($filters, $order, $parent, $select, $select2, $a, $b, $on);
+		//$this->productEvent->onBeforeProductListingLoad($filters, $order, $parent, $select, $select2, $a, $b, $on);
 	}
 	
 	/**
@@ -99,6 +98,19 @@ class PlgHikashopHikabarr extends CMSPlugin
 	public function onUserAccountDisplay(&$buttons)
 	{
 		$this->userEvent->onUserAccountDisplay($buttons);
+	}
+
+	public function fetchData()
+	{
+		$this->dataHelper->fetchDataFromDolibarr();
+	}
+
+	/**
+	 * Cron pour récupérer les données de Dolibarr sur Hikashop
+	 */
+	public function onCronHikabarr(Event $event)
+	{
+		$this->dataHelper->fetchDataFromDolibarr();
 	}
 
 }
