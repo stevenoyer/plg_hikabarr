@@ -31,10 +31,10 @@ class ProductEvent
     */
     public function onBeforeProductListingLoad(&$filters, &$order, &$parent, &$select, &$select2, &$a, &$b, &$on) 
     {
-        // Appelle de la fonction de sauvegarde des données en asynchrone
-        Loop::addTimer(0.5, async(function() {
-            $this->dataHelper->fetchDataFromDolibarr();
-        }));
+        // Appelle de la fonction de sauvegarde des données en "asynchrone"
+        // Loop::addTimer(3600, async(function() {
+        // }));
+        $this->dataHelper->fetchDataFromDolibarr();
     }
 
 }
