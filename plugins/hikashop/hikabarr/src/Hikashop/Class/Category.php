@@ -6,6 +6,8 @@ use hikashopCategoryClass;
 use Joomla\CMS\Factory;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\CategoryModel;
 
+require_once JPATH_ROOT . '/administrator/components/com_hikashop/classes/category.php';
+
 class Category
 {
     private CategoryModel $category;

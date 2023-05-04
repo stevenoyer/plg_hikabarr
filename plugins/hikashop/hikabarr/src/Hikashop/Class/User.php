@@ -7,6 +7,8 @@ use Joomla\CMS\Factory;
 use Joomla\Database\DatabaseDriver;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\UserModel;
 
+require_once JPATH_ROOT . '/administrator/components/com_hikashop/classes/user.php';
+
 class User
 {
     private UserModel $user;
