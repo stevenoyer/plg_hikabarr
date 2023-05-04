@@ -5,7 +5,7 @@ namespace Systrio\Plugins\Hikabarr\Dolibarr\Models;
 class ThirdpartyModel
 {
 
-    public ?int $id;
+    public ?int $id = null;
     public ?string $name;
     public ?string $nameAlias;
     public bool|null $entity;
