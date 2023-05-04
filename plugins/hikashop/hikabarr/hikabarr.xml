@@ -18,7 +18,7 @@
 		<filename>composer.lock</filename>
 		<filename plugin="hikabarr">hikabarr.php</filename>
 		<filename>hikabarr.xml</filename>
-		<filename>ajax.php</filename>
+		<filename>cron.php</filename>
 	</files>
 	<languages>
 		<language tag="fr-FR">language/fr-FR/plg_hikashop_hikabarr.ini</language>
@@ -27,11 +27,10 @@
 	<config>
 		<fields name="params">
             <fieldset name="basic">
+				<field name="notice_cron" type="note" class="alert alert-info" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_CRON_INSTRUCTION" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_CRON_INSTRUCTION_DESC" />
                 <field name="api_url" type="text" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL_DESC" />
                 <field name="api_key" type="text" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY_DESC" />
-            </fieldset>
-
-			
+            </fieldset>			
         </fields>
 	</config>
 </extension>
