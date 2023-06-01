@@ -30,7 +30,7 @@ class ProductFileHelper
             // On défini un nouveau fichier modèle
             $fileHika = new FileModel;
             $fileHika->file_name = $file->name;
-            $fileHika->fullname_dolibarr = $file->fullname;
+            //$fileHika->fullname_dolibarr = $file->fullname;
 
             // On télécharge les documents du produit
             $download = $this->client->requestApi->request(RequestApi::METHOD_GET, 'documents/download', ['modulepart' => 'product', 'original_file' => explode('/produit/', $file->fullname)[1]]);
