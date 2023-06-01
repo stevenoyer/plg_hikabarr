@@ -25,7 +25,13 @@ class CategoryHelper
     {
         // Récupération des catégories Dolibarr
         $categories = $this->client->requestApi->request(RequestApi::METHOD_GET, 'products/' . $product_id . '/categories');
-        return json_decode($categories);
+        $categories = json_decode($categories);
+        if (empty($categories->error))
+        {
+            return $categories;
+        }
+
+        return [];
     }
 
     /**
@@ -69,7 +75,10 @@ class CategoryHelper
         $categories_ids = [];
         foreach ($categories_hika as $category)
         {
-            $categories_ids[] = $category->category_id;
+            if (!is_bool($category))
+            {
+                $categories_ids[] = $category->category_id;
+            }
         }
 
         return $categories_ids;
