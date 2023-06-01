@@ -73,7 +73,7 @@ class ProductHelper
 			$productHika->images = $this->productFileHelper->saveFiles($product->id);
 			
 			// On défini les catégories auquel l'article est rataché
-			$productHika->categories = $categories_ids;
+			$productHika->categories = empty($categories_ids) ? [2] : $categories_ids;
 			$priceHika->price_value = (float) $product->price_ttc;
 			$priceHika->price_min_quantity = 1;
 
