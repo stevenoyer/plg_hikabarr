@@ -35,9 +35,20 @@ class DataHelper
 		$warehouses = json_decode($this->client->requestApi->get('warehouses'));
 
 		// Sauvegarde des données
-		$this->categoryHelper->saveCategories($categories);
-		$this->productHelper->saveProducts($products);
-		$this->warehouseHelper->saveWarehouses($warehouses);
+		if (empty($warehouses->error))
+		{
+			$this->warehouseHelper->saveWarehouses($warehouses);
+		}
+
+		if (empty($products->error))
+		{
+			$this->productHelper->saveProducts($products);
+		}
+
+		if (empty($categories->error))
+		{
+			$this->categoryHelper->saveCategories($categories);
+		}
 	}
     
 }
