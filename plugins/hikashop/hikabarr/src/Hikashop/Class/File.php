@@ -7,6 +7,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\File as FilesystemFile;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\FileModel;
 
+require_once JPATH_ROOT . '/administrator/components/com_hikashop/helpers/helper.php';
 require_once JPATH_ROOT . '/administrator/components/com_hikashop/classes/file.php';
 
 class File

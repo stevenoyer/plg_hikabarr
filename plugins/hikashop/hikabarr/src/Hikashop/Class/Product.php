@@ -8,6 +8,7 @@ use Joomla\Database\DatabaseDriver;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\PriceModel;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\ProductModel;
 
+require_once JPATH_ROOT . '/administrator/components/com_hikashop/helpers/helper.php';
 require_once JPATH_ROOT . '/administrator/components/com_hikashop/classes/product.php';
 
 class Product

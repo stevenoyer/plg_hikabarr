@@ -10,6 +10,7 @@ use Systrio\Plugins\Hikabarr\Dolibarr\Models\WarehouseModel as WarehouseDolibarr
 use Systrio\Plugins\Hikabarr\Dolibarr\Services\WarehouseService;
 use Systrio\Plugins\Hikabarr\Hikashop\Models\WarehouseModel;
 
+require_once JPATH_ROOT . '/administrator/components/com_hikashop/helpers/helper.php';
 require_once JPATH_ROOT . '/administrator/components/com_hikashop/classes/warehouse.php';
 
 class Warehouse
