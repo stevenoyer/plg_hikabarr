@@ -88,13 +88,16 @@ class ProductHelper
 	 */
 	public function getWarehouseLabelById(int $warehouse_id)
 	{
-		$warehouseModel = new WarehouseModel;
-		$warehouseModel->id = $warehouse_id;
-
-		$warehouseService = new WarehouseService($this->client, $warehouseModel);
-		$warehouse = $warehouseService->get()->label;
-
-		return $warehouse;
+		if (!is_null($warehouse_id))
+		{
+			$warehouseModel = new WarehouseModel;
+			$warehouseModel->id = $warehouse_id;
+			
+			$warehouseService = new WarehouseService($this->client, $warehouseModel);
+			$warehouse = $warehouseService->get()->label;
+	
+			return $warehouse;
+		}
 	}
 
 	/**
@@ -102,11 +105,14 @@ class ProductHelper
 	 */
 	public function getWarehouseHikashopByName(string $warehouse_name)
 	{
-		$warehouseModel = new WarehouseModelHikashop;
-		$warehouseModel->warehouse_name = $warehouse_name;
-
-		$warehouseClass = new Warehouse($warehouseModel, $this->client);
-		return $warehouseClass->get();
+		if (!is_null($warehouse_name))
+		{
+			$warehouseModel = new WarehouseModelHikashop;
+			$warehouseModel->warehouse_name = $warehouse_name;
+	
+			$warehouseClass = new Warehouse($warehouseModel, $this->client);
+			return $warehouseClass->get();
+		}
 	}
     
 }
