@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" version="4.0" method="upgrade" group="hikashop">
-	<name>Hikabarr</name>
+	<name>plg_hikashop_hikabarr</name>
 	<creationDate>28 mars 2023</creationDate>
-	<version>1.1.7</version>
+	<version>1.1.8</version>
 	<author>Steven Oyer (systrio)</author>
 	<authorEmail>steven@systrio.fr</authorEmail>
 	<authorUrl>http://www.systrio.fr</authorUrl>
@@ -26,11 +26,17 @@
 	</languages>
 	<config>
 		<fields name="params">
-            <fieldset name="basic">
-				<field name="notice_cron" type="note" class="alert alert-info" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_CRON_INSTRUCTION" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_CRON_INSTRUCTION_DESC" />
-                <field name="api_url" type="text" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL_DESC" />
-                <field name="api_key" type="text" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY_DESC" />
-            </fieldset>			
+			<fieldset name="documentation" label="PLG_HIKABARR_PARAMS_FIELDSET_LABEL_PARAMS_DOCUMENTATION">
+				<field name="notice_dolibarr" type="note" class="alert alert-info" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_DOLIBARR_INSTRUCTION" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_DOLIBARR_INSTRUCTION_DESC" />
+				<field name="notice_task" type="note" class="alert alert-info" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_TASK_INSTRUCTION" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_TASK_INSTRUCTION_DESC" />
+            </fieldset>
+
+			<fieldset name="params" label="PLG_HIKABARR_PARAMS_FIELDSET_LABEL_PARAMS" addfieldprefix="Systrio\Plugins\Hikabarr\Field">
+				<field name="api_url" type="text" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL_DESC" />
+				<field name="api_key" type="text" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY_DESC" />
+				<field name="verifconnection" type="verifconnection" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_BUTTON_VERIF" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY_DESC" />
+			</fieldset>	
         </fields>
+
 	</config>
 </extension>
