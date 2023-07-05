@@ -2,7 +2,7 @@
 <extension type="plugin" version="4.0" method="upgrade" group="hikashop">
 	<name>plg_hikashop_hikabarr</name>
 	<creationDate>28 mars 2023</creationDate>
-	<version>1.1.8</version>
+	<version>1.1.8default="" </version>
 	<author>Steven Oyer (systrio)</author>
 	<authorEmail>steven@systrio.fr</authorEmail>
 	<authorUrl>http://www.systrio.fr</authorUrl>
@@ -32,8 +32,8 @@
             </fieldset>
 
 			<fieldset name="params" label="PLG_HIKABARR_PARAMS_FIELDSET_LABEL_PARAMS" addfieldprefix="Systrio\Plugins\Hikabarr\Field">
-				<field name="api_url" type="text" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL_DESC" />
-				<field name="api_key" type="text" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY_DESC" />
+				<field name="api_url" type="text" default="" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIURL_DESC" />
+				<field name="api_key" type="text" default="" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY_DESC" />
 				<field name="verifconnection" type="verifconnection" label="PLG_HIKABARR_PARAMS_FIELDS_LABEL_BUTTON_VERIF" description="PLG_HIKABARR_PARAMS_FIELDS_LABEL_APIKEY_DESC" />
 			</fieldset>	
         </fields>
