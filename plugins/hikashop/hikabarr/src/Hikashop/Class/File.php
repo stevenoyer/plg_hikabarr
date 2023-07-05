@@ -34,7 +34,14 @@ class File
 
     public function upload($file): string
     {
-        $file_path = $this->path_upload . $this->path_upload_subdirectory . $file->filename;
+        $directory = $this->path_upload . $this->path_upload_subdirectory;
+
+        if (!is_dir($directory))
+        {
+            mkdir($directory, 0777);
+        }
+
+        $file_path = $directory . $file->filename;
         file_put_contents($file_path, base64_decode($file->content));
 
         return $this->path_upload_subdirectory . $file->filename;
