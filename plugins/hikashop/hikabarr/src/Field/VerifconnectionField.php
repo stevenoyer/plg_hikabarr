@@ -20,11 +20,16 @@ class VerifconnectionField extends FormField
     public function getPluginParams()
     {
         $plugin = PluginHelper::getPlugin('hikashop', 'hikabarr');
+        if (empty($plugin->params)) return;
+
         return json_decode($plugin->params);
     }
     
     public function getInput()
     {
+        if (empty($this->getPluginParams()->api_url)) return '';
+        if (empty($this->getPluginParams()->api_key)) return '';
+
         $request = new RequestApi($this->getPluginParams()->api_url, $this->getPluginParams()->api_key);
         $result = (!is_bool($request->get('status'))) ? $request->get('status') : '""';
 
@@ -70,20 +75,13 @@ class VerifconnectionField extends FormField
             }
         ');
 
-        if (empty($this->getPluginParams()->api_url) || empty($this->getPluginParams()->api_key))
-        {
-            return '';
-        }
-
         return '<button class="btn btn-success" id="btn-verif-connection">' . Text::_('PLG_HIKABARR_PARAMS_FIELDS_BUTTON_VERIF') . '</button>';
     }
 
     public function getLabel()
     {
-        if (empty($this->getPluginParams()->api_url) || empty($this->getPluginParams()->api_key))
-        {
-            return '';
-        }
+        if (empty($this->getPluginParams()->api_url)) return '';
+        if (empty($this->getPluginParams()->api_key)) return '';
 
         return parent::getLabel();
     }
